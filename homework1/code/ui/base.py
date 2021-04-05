@@ -1,5 +1,6 @@
 import pytest
-import locators
+import time
+from ui import locators
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -24,44 +25,51 @@ class BaseCase:
             timeout = 5
         return WebDriverWait(self.driver, timeout=timeout)
 
-    def search(self, variable):
-        TEMP_VAR = (By.XPATH, f"//a[contains(@class, '{variable}')]")
-        self.click(TEMP_VAR)
+    def find_paramitrize(self, variable, title):
+        self.login()
+        temp_var = (locators.MenuLocs.PARAMITRIZE_VAR[0],
+                    locators.MenuLocs.PARAMITRIZE_VAR[1].format(variable))
+        self.click(temp_var)
+        time.sleep(2)
+        assert title in self.driver.title
 
-    def info(self, flag=False):
-        self.register()
-        self.click(locators.MenuLocs.PROFILE_BUTTON)
-        elem = self.find(locators.MenuLocs.NAME_FIELD)
+    def clear_to_send(self, elem, key):
         elem.clear()
-        elem.send_keys('pvl')
+        elem.send_keys(key)
+
+    def fill_profile(self):
+        self.login()
+        self.click(locators.ProfileLocs.PROFILE_BUTTON)
+        elem = self.find(locators.ProfileLocs.NAME_FIELD)
+        self.clear_to_send(elem, 'pvl')
         elem = self.find(locators.ProfileLocs.PHONE_FIELD)
-        elem.clear()
-        elem.send_keys('123456')
-        elem = self.find(locators.MenuLocs.MAIL_FILED)
-        elem.clear()
-        elem.send_keys('test@mail.ru')
-        self.click(locators.MenuLocs.SUBMIT_BUTTON)
+        self.clear_to_send(elem, '123456')
+        elem = self.find(locators.ProfileLocs.MAIL_FILED)
+        self.clear_to_send(elem, 'test@mail.ru')
+        self.click(locators.ProfileLocs.SUBMIT_BUTTON)
+        time.sleep(1)
         self.driver.refresh()
-        if(flag):
-            return self.driver.page_source
+        time.sleep(1)
+        elem = self.find(locators.ProfileLocs.NAME_FIELD).get_attribute('value')
+        assert 'pvl' == elem
+        elem = self.find(locators.ProfileLocs.MAIL_FILED).get_attribute('value')
+        assert 'test@mail.ru' == elem
+        elem = self.find(locators.ProfileLocs.PHONE_FIELD).get_attribute('value')
+        assert '123456' == elem
 
-    def register(self, flag=False):
+    def login(self):
         self.click(locators.LoginLocs.ENTER_BUTTON)
         elem = self.find(locators.LoginLocs.LOGIN_FIELD)
-        elem.clear()
-        elem.send_keys('another.acc@mail.ru')
+        self.clear_to_send(elem, 'another.acc@mail.ru')
         elem = self.find(locators.LoginLocs.PASS_FIELD)
-        elem.clear()
-        elem.send_keys('ytr123qwe')
+        self.clear_to_send(elem, 'ytr123qwe')
         self.click(locators.LoginLocs.LOGIN_BUTTON)
-        if(flag):
-            return self.driver.title
 
-    def logout(self, flag=False):
+    def logout(self):
+        self.login()
         self.click(locators.MenuLocs.MENU_EXIT)
+        time.sleep(1)
         self.click(locators.MenuLocs.EXIT_BUTTON)
-        if (flag):
-            return self.driver.title
 
     def click(self, locator, timeout=None):
         for i in range(CLICK_RETRY):
