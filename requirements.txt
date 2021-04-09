@@ -1,0 +1,4 @@
+ allure-pytest-2.8.40,
+ forked-1.3.0,
+ icdiff-0.5,
+ xdist-2.2.1
