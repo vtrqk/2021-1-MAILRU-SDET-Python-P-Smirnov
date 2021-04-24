@@ -8,6 +8,6 @@ class DashBoardLocators:
     MENU_EXIT = (By.XPATH, "//div[contains(@class, 'right-module-rightWrap')]")
     EXIT_BUTTON = (By.XPATH, "//a[contains(text(), 'Выйти')]")
     CHECK_COMPANY = (By.XPATH, "//a[contains(text(), '{}')]")
-    ID_CHECKBOX = (By.XPATH, "//input[@type='checkbox']")
+    ID_CHECKBOX = (By.XPATH, "//a[contains(text(), '{}')]/ancestor::div[@data-entity-type='campaign']/input")
     ACTION_BUTTON = (By.XPATH, "//span[contains(text(), 'Действия')]")
     DELETE_COMPANY_BUTTON = (By.XPATH, "//li[@title='Удалить']")

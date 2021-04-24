@@ -1,16 +1,19 @@
+import allure
+
 from ui.pages.base_page import BasePage
 from ui.locators.campaign_new_locators import CampaignNewLocators
 
-CAMPAIGN_LINK = 'https://vk.com/fanpapich'
+CAMPAIGN_LINK = 'https://vk.com/{}'
 
 
 class CampaignNewPage(BasePage):
     locators = CampaignNewLocators()
 
-    def create_new_campaign(self, file_path):
+    @allure.step('Going to create campaign with name {name}')
+    def create_new_campaign(self, file_path, name):
         self.click(locator=self.locators.TRAFFIC_BUTTON)
         elem = self.find(locator=self.locators.LINK_FIELD)
-        self.clear_to_send(elem, CAMPAIGN_LINK)
+        self.clear_to_send(elem, CAMPAIGN_LINK.format(name))
         self.click(locator=self.locators.TEASER_BUTTON)
         input_field = self.find(locator=self.locators.ADD_IMG_BUTTON)
         input_field.send_keys(file_path)
@@ -22,4 +25,6 @@ class CampaignNewPage(BasePage):
         self.clear_to_send(elem, "Header")
         elem = self.find(locator=self.locators.DESCRIPTION_FIELD)
         self.clear_to_send(elem, "Some description")
+        elem = self.find(locator=self.locators.NAME_COMPANY_FIELD)
+        self.clear_to_send(elem, name)
         self.click(locator=self.locators.CREATE_COMPANY_BUTTON)

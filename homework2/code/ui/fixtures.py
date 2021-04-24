@@ -4,9 +4,6 @@ import allure
 import pytest
 
 from ui.pages.main_page import MainPage
-from ui.pages.segments_page import SegmentsPage
-from ui.pages.campaign_new_page import CampaignNewPage
-from ui.pages.segments_new_page import SegmentsNewPage
 from ui.pages.dashboard_page import DashBoardPage
 
 
@@ -17,21 +14,6 @@ PASSWORD = "ytr123qwe"
 @pytest.fixture
 def main_page(driver):
     return MainPage(driver=driver)
-
-
-@pytest.fixture
-def segments_page(driver):
-    return SegmentsPage(driver=driver)
-
-
-@pytest.fixture
-def segments_new_page(driver):
-    return SegmentsNewPage(driver=driver)
-
-
-@pytest.fixture
-def campaign_new_page(driver):
-    return CampaignNewPage(driver=driver)
 
 
 @pytest.fixture(scope='function')

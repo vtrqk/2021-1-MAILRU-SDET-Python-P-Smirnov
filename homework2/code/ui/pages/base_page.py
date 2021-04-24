@@ -1,13 +1,11 @@
 import logging
 
-import pytest
-
 from ui.locators.main_locators import MainLocators
 from utils.decorators import wait
-from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException, ElementClickInterceptedException
 
 logger = logging.getLogger('test')
+
 
 class BasePage(object):
 

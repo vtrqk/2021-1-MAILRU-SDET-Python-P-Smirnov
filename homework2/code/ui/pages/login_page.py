@@ -1,6 +1,7 @@
 from ui.pages.base_page import BasePage
 from ui.locators.login_locators import LoginLocators
 
+
 class LoginPage(BasePage):
 
     locators = LoginLocators()
