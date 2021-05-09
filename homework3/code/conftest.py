@@ -1,15 +1,8 @@
-from ui.fixtures import *
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
+import pytest
+
+from api.client import ApiClient
 
 
-@pytest.fixture(scope='function')
-def driver():
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    manager = ChromeDriverManager(version='latest')
-    browser = webdriver.Chrome(executable_path=manager.install(), options=options)
-    browser.get('https://target.my.com')
-    browser.set_window_size(1400, 1000)
-    yield browser
-    browser.quit()
+@pytest.fixture()
+def api_client():
+    return ApiClient()
