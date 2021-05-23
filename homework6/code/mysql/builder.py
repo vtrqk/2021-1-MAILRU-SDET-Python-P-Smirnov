@@ -27,7 +27,7 @@ class MySQLBuilder:
         list_requests = count_post_and_get()
         post_and_get_model = PostAndGet(
             get_count=list_requests[0],
-            post_cout=list_requests[1]
+            post_count=list_requests[1]
         )
         self.client.session.add(post_and_get_model)
         self.client.session.commit()
@@ -48,7 +48,7 @@ class MySQLBuilder:
     def create_all_requests(self):
         result = count_all_requests()
         all_requests_model = AllRequests(
-            count_all= result
+            count_all=result
         )
         self.client.session.add(all_requests_model)
         self.client.session.commit()

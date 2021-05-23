@@ -4,7 +4,7 @@ import os
 def count_all_requests():
 
     cur_path = os.path.dirname(__file__)
-    file_name = 'access.log'
+    file_name = 'resources/access.log'
     len_folder = len(cur_path.split('/')[6])
     len_cur_path = len(cur_path)
 
@@ -13,6 +13,3 @@ def count_all_requests():
         while f.readline() != "":
             count_requests += 1
         return count_requests
-
-
-

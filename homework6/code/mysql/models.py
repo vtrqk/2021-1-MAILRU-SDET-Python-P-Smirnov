@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -8,15 +8,17 @@ class PostAndGet(Base):
     __tablename__ = 'post_and_get'
     __table_args__ = {'mysql_charset': 'utf8'}
 
-    get_count = Column(String(20), nullable=False)
-    post_count = Column(String(20), nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    get_count = Column(Integer, nullable=False)
+    post_count = Column(Integer, nullable=False)
 
 
 class AllRequests(Base):
     __tablename__ = 'all_requests'
     __table_args__ = {'mysql_charset': 'utf8'}
 
-    count_all = Column(String(20), nullable=False)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    count_all = Column(Integer, nullable=False)
 
 
 class FavoriteRequests(Base):
