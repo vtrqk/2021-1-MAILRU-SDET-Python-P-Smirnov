@@ -28,7 +28,7 @@ class MysqlClient:
         )
         self.connection = self.engine.connect()
         self.session = sessionmaker(bind=self.connection.engine,
-                                    autocommit=False,
+                                    autocommit=True,
                                     expire_on_commit=False
                                     )()
 
