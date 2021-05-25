@@ -21,6 +21,7 @@ class MySQLBuilder:
                 count=count
             )
             self.client.session.add(favorite_model)
+        self.client.session.commit()
 
     def create_post_and_get(self):
         list_requests = count_post_and_get()
@@ -29,6 +30,7 @@ class MySQLBuilder:
             post_count=list_requests[1]
         )
         self.client.session.add(post_and_get_model)
+        self.client.session.commit()  # don't have cycle
 
     def create_top_users(self):
         list_requests = get_top_users()
@@ -41,6 +43,7 @@ class MySQLBuilder:
                 count=count
             )
             self.client.session.add(top_users_model)
+        self.client.session.commit()
 
     def create_all_requests(self):
         result = count_all_requests()
@@ -48,6 +51,7 @@ class MySQLBuilder:
             count_all=result
         )
         self.client.session.add(all_requests_model)
+        self.client.session.commit()  # don't have cycle
 
     def create_largest_requests(self):
         list_requests = get_largest_requests()
@@ -61,3 +65,4 @@ class MySQLBuilder:
                 size=size
             )
             self.client.session.add(largest_model)
+        self.client.session.commit()
