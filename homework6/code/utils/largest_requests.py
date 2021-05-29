@@ -11,12 +11,9 @@ def get_size(firs_var, second_var):
 
 def get_largest_requests():
 
-    cur_path = os.path.dirname(__file__)
-    file_name = 'resources/access.log'
-    len_folder = len(cur_path.split('/')[7])
-    len_cur_path = len(cur_path)
+    file_access_path = 'resources/access.log'
 
-    with open(cur_path[0:(len_cur_path - len_folder)] + file_name, 'r') as f:
+    with open(os.path.join(os.path.dirname(os.getcwd()), file_access_path), 'r') as f:
         current_string = f.readline()
         elem_tuple: dict = {}
         unique_ip_map: dict = {}
